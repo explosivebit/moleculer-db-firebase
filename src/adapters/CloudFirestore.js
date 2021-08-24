@@ -37,10 +37,8 @@ class CloudFireStoreDbAdapter {
     if (!firebase.apps.length) {
       this.instance = firebase.initializeApp(this.options);
     }else {
-      firebase.app(); // if already initialized, use that one
+      this.instance = firebase.app(); // if already initialized, use that one
     }
-
-    // this.instance = firebase.initializeApp(options);
   }
 
   /**
