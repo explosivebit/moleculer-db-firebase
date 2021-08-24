@@ -12,9 +12,8 @@ class CloudFireStoreDbAdapter {
    *
    * @memberof CloudFireStoreDbAdapter
    */
-  constructor(apiKey, projectId) {
-    this.apiKey = apiKey;
-    this.projectId = projectId;
+  constructor(options) {
+    this.options = options;
   }
 
   /**
@@ -35,10 +34,13 @@ class CloudFireStoreDbAdapter {
       );
     }
 
-    this.instance = firebase.initializeApp({
-      apiKey: this.apiKey,
-      projectId: this.projectId,
-    });
+    if (!firebase.apps.length) {
+      this.instance = firebase.initializeApp(this.options);
+    }else {
+      firebase.app(); // if already initialized, use that one
+    }
+
+    // this.instance = firebase.initializeApp(options);
   }
 
   /**
